@@ -1,0 +1,18 @@
+# started on Fri Apr 20 11:51:37 2018
+
+
+ Performance counter stats for './t2.o 1000' (2 runs):
+
+       4199,777371      task-clock:u (msec)       #    1,000 CPUs utilized            ( +-  3,15% )
+                 0      context-switches:u        #    0,000 K/sec                  
+                 0      cpu-migrations:u          #    0,000 K/sec                  
+             1.201      page-faults:u             #    0,286 K/sec                    ( +- 21,32% )
+    11.171.786.728      cycles:u                  #    2,660 GHz                      ( +-  3,08% )
+     6.183.159.630      stalled-cycles-frontend:u #   55,35% frontend cycles idle     ( +-  5,59% )
+    18.626.862.360      instructions:u            #    1,67  insn per cycle         
+                                                  #    0,33  stalled cycles per insn  ( +-  0,00% )
+     1.613.636.904      branches:u                #  384,220 M/sec                    ( +-  0,00% )
+         2.362.659      branch-misses:u           #    0,15% of all branches          ( +-  1,12% )
+
+       4,200187534 seconds time elapsed                                          ( +-  3,15% )
+

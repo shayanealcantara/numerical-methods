@@ -1,0 +1,18 @@
+# started on Fri Apr 20 11:51:34 2018
+
+
+ Performance counter stats for './t2.o 400' (10 runs):
+
+        272,759356      task-clock:u (msec)       #    0,999 CPUs utilized            ( +-  0,63% )
+                 0      context-switches:u        #    0,000 K/sec                  
+                 0      cpu-migrations:u          #    0,000 K/sec                  
+               724      page-faults:u             #    0,003 M/sec                    ( +-  0,03% )
+       716.564.853      cycles:u                  #    2,627 GHz                      ( +-  0,47% )
+       292.424.932      stalled-cycles-frontend:u #   40,81% frontend cycles idle     ( +-  1,15% )
+     1.519.841.060      instructions:u            #    2,12  insn per cycle         
+                                                  #    0,19  stalled cycles per insn  ( +-  0,00% )
+       167.193.470      branches:u                #  612,971 M/sec                    ( +-  0,00% )
+           420.491      branch-misses:u           #    0,25% of all branches          ( +-  0,13% )
+
+       0,273023051 seconds time elapsed                                          ( +-  0,64% )
+

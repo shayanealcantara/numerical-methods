@@ -1,18 +1,18 @@
-# started on Fri Apr 20 09:12:25 2018
+# started on Fri Apr 20 11:51:07 2018
 
 
  Performance counter stats for 'octave T2.m 50' (10 runs):
 
-        220,166942      task-clock:u (msec)       #    0,963 CPUs utilized            ( +-  0,76% )
+        221,762897      task-clock:u (msec)       #    0,961 CPUs utilized            ( +-  2,05% )
                  0      context-switches:u        #    0,000 K/sec                  
                  0      cpu-migrations:u          #    0,000 K/sec                  
-             4.880      page-faults:u             #    0,022 M/sec                    ( +-  0,05% )
-       437.133.385      cycles:u                  #    1,985 GHz                      ( +-  0,18% )
-       323.850.286      stalled-cycles-frontend:u #   74,09% frontend cycles idle     ( +-  0,27% )
-       548.461.604      instructions:u            #    1,25  insn per cycle         
-                                                  #    0,59  stalled cycles per insn  ( +-  0,01% )
-       110.164.763      branches:u                #  500,369 M/sec                    ( +-  0,02% )
-         2.588.376      branch-misses:u           #    2,35% of all branches          ( +-  0,11% )
+             4.811      page-faults:u             #    0,022 M/sec                    ( +-  0,06% )
+       443.477.934      cycles:u                  #    2,000 GHz                      ( +-  2,11% )
+       331.608.412      stalled-cycles-frontend:u #   74,77% frontend cycles idle     ( +-  3,54% )
+       538.415.756      instructions:u            #    1,21  insn per cycle         
+                                                  #    0,62  stalled cycles per insn  ( +-  0,01% )
+       108.029.184      branches:u                #  487,138 M/sec                    ( +-  0,02% )
+         2.554.595      branch-misses:u           #    2,36% of all branches          ( +-  0,34% )
 
-       0,228664163 seconds time elapsed                                          ( +-  0,75% )
+       0,230680991 seconds time elapsed                                          ( +-  2,00% )
 
