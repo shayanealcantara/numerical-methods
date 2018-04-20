@@ -24,10 +24,10 @@ for i = 1:n
     if i == j
       matriz(i,j) = a;
       if i > 1
-        matriz(i-1,j)=b;
+        matriz(i-1,j) = b;
       end
       if i < n
-        matriz(i+1,j)=b;
+        matriz(i+1,j) = b;
       end
     end
 
@@ -38,4 +38,9 @@ end
 matriz
 
 # Calculate Autovalor and Autovetor of matriz
-[autovalor autovetor] = eig(matriz)
+[autovetor autovalor] = eig(matriz);
+disp("autovalor = \n")
+disp(diag(autovalor))
+disp("")
+
+autovetor
