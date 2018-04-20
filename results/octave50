@@ -1,0 +1,18 @@
+# started on Fri Apr 20 09:12:25 2018
+
+
+ Performance counter stats for 'octave T2.m 50' (10 runs):
+
+        220,166942      task-clock:u (msec)       #    0,963 CPUs utilized            ( +-  0,76% )
+                 0      context-switches:u        #    0,000 K/sec                  
+                 0      cpu-migrations:u          #    0,000 K/sec                  
+             4.880      page-faults:u             #    0,022 M/sec                    ( +-  0,05% )
+       437.133.385      cycles:u                  #    1,985 GHz                      ( +-  0,18% )
+       323.850.286      stalled-cycles-frontend:u #   74,09% frontend cycles idle     ( +-  0,27% )
+       548.461.604      instructions:u            #    1,25  insn per cycle         
+                                                  #    0,59  stalled cycles per insn  ( +-  0,01% )
+       110.164.763      branches:u                #  500,369 M/sec                    ( +-  0,02% )
+         2.588.376      branch-misses:u           #    2,35% of all branches          ( +-  0,11% )
+
+       0,228664163 seconds time elapsed                                          ( +-  0,75% )
+
