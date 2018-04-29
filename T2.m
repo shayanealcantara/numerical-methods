@@ -19,19 +19,15 @@ end
 matriz = zeros(n);
 
 # Set b and a of matriz
-for i = 1:n
-  for j = 1:n
-    if i == j
-      matriz(i,j) = a;
-      if i > 1
-        matriz(i-1,j) = b;
-      end
-      if i < n
-        matriz(i+1,j) = b;
-      end
-    end
+matriz(1, 1) = a;
+matriz(1, 2) = b;
+matriz(n, n) = a;
+matriz(n, n-1) = b;
 
-  end
+for i = 2:(n-1)
+  matriz(i, i) = a;
+  matriz(i, i - 1) = b;
+  matriz(i, i + 1) = b;
 end
 
 # Display matriz

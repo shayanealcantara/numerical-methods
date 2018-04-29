@@ -22,21 +22,19 @@ int main(int argc, char *argv[]) {
     memset(matrix, 0, sizeof(matrix));
 
     // Set a and b in matrix
-    for (int coluna = 0; coluna < n; coluna++) {
-        for (int linha = 0; linha < n; linha++) {
-            if (coluna == linha) {
-                matrix[coluna * n + linha] = A;
+    matrix[0] = A; // Set [0,0] = 1
+    matrix[1] = B; // Set [0,1] = 0.5
 
-                if (coluna > 0) { // Avoid out of bounds
-                    matrix[linha * n + (coluna - 1)] = B;
-                }
-                if (coluna < (n - 1)) { // Avoid out of bounds
-                    matrix[linha * n + (coluna + 1)] = B;
-                }
-            }
+    matrix[(n-1) * n + (n-1)] = A; // Set [n-1, n-1] = 1
+    matrix[(n-1) * n + (n-2)] = B; // Set [n-1, n-2] = 0.5
 
-        }
+    // Set remains
+    for (int coluna = 1; coluna < (n - 1); coluna ++){
+        matrix[coluna * n + coluna] = A;
+        matrix[coluna * n + (coluna - 1)] = B;
+        matrix[coluna * n + (coluna + 1)] = B;
     }
+
     displayMatrix(&matrix[0], n, n);
 
     gsl_matrix_view m = gsl_matrix_view_array(matrix, n, n);
@@ -47,6 +45,11 @@ int main(int argc, char *argv[]) {
     gsl_eigen_symmv(&m.matrix, eval, evec, w);
     gsl_eigen_symmv_free(w);
     gsl_eigen_symmv_sort(eval, evec, GSL_EIGEN_SORT_ABS_ASC);
+
+    // gsl_eigen_symm_workspace * w = gsl_eigen_symm_alloc(n);
+    // gsl_eigen_symm(&m.matrix, eval, w);
+    // gsl_eigen_symm_free(w);
+    // gsl_eigen_symm_sort(eval, GSL_EIGEN_SORT_ABS_ASC);
 
     printf("autovalor = \n\n");
     for (int i = 0; i < n; i++) {
