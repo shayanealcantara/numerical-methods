@@ -19,9 +19,11 @@ int main(int argc, char *argv[]) {
     }
 
     // Create vector with diagonal values of matriz T
-    double diagonal[n];
+    double *diagonal;
+    diagonal = malloc(n * sizeof(double));
     // Create vector with subdiagonal values of matriz T
-    double subdiagonal[n];
+    double *subdiagonal;
+    subdiagonal = malloc(n * sizeof(double));
 
     // Set values of diagonal and subdiagonal vectors
     for (int i = 0; i < n; i++) {
@@ -43,14 +45,21 @@ int main(int argc, char *argv[]) {
     lapack_int LDZ = n;
     lapack_int ISUPPZ[2 * n];
 
+    // Define pointer to autovalores and autovetores
+    double *autovalores;
+    double *autovetor;
 
+    // Define size of autovalores and autovetor
+    unsigned long sizeofAutovalores = n * sizeof(double);
+    unsigned long sizeofAutovetor = n * n * sizeof(double);
 
-    // Define array of autovalores and autovetores
-    double autovalores[n];
-    double autovetor[n * n];
+    // Allocate space to autovalores and autovetor
+    autovalores = malloc(sizeofAutovalores);
+    autovetor = malloc(sizeofAutovetor);
+
     // Set autovalores and autovetor to 0 (just to be sure)
-    memset(autovalores, 0, sizeof(autovalores));
-    memset(autovetor, 0, sizeof(autovetor));
+    memset(autovalores, 0, sizeofAutovalores);
+    memset(autovetor, 0, sizeofAutovetor);
 
     // Set parameter to know success of LAPACKE function
     lapack_int info;
@@ -60,7 +69,15 @@ int main(int argc, char *argv[]) {
                     unusedDouble, unusedInt, unusedInt,
                     unusedDouble, &M, autovalores, autovetor, LDZ, ISUPPZ);
 
+
+
     if (info) { // info is zero if operation was successfully
+        // Free pointers before abort program
+        free(diagonal);
+        free(subdiagonal);
+        free(autovalores);
+        free(autovetor);
+
         printf("Unable to operate operation, error: %d\n", info);
         return info; // abort program and return info
     }
@@ -79,6 +96,12 @@ int main(int argc, char *argv[]) {
         printf("\n");
     }
     printf("\n");
+
+    // Free pointers before end program
+    free(diagonal);
+    free(subdiagonal);
+    free(autovalores);
+    free(autovetor);
 
     return 0;
 }

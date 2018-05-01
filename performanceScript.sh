@@ -15,9 +15,7 @@ ulimit -s 8192 # Set default Stack of my computer
 
 # Performance of LAPACK C
 gcc t2_lapack.c -o t2_lapack.o -llapacke
-ulimit -s 100000000 # Increase Stack
 perf stat -r 10 -B -o results/c_lapack_50 ./t2_lapack.o 50 > /dev/null
 perf stat -r 10 -B -o results/c_lapack_400 ./t2_lapack.o 400 > /dev/null
 perf stat -r 2 -B -o results/c_lapack_1000 ./t2_lapack.o 1000 > /dev/null
 perf stat -r 1 -B -o results/c_lapack_5000 ./t2_lapack.o 5000 > /dev/null
-ulimit -s 8192 # Set default Stack of my computer
