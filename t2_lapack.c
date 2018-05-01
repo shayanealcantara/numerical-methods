@@ -6,8 +6,8 @@
 #define A 1
 #define B 0.5
 
-void displayMatrix(double *, int, int);
-void displayVector(double *, int);
+void displayMatrix(double *, int, int, char[]);
+void displayVector(double *, int, char[]);
 
 int main(int argc, char *argv[]) {
     lapack_int n = 10;
@@ -32,8 +32,8 @@ int main(int argc, char *argv[]) {
     }
 
     // If you want to display values of diagonal and subdiagonal vectors
-    // displayVector(diagonal, n);
-    // displayVector(subdiagonal, n);
+    displayVector(diagonal, n, "diagonal");
+    displayVector(subdiagonal, n, "subdiagonal");
 
     // Reference: http://www.netlib.org/lapack/explore-html/da/dba/group__double_o_t_h_e_rcomputational_gac5fa1f1c4eeb2f78df2ea644641392f6.html
     // Set parameters used in LAPACK function
@@ -69,8 +69,6 @@ int main(int argc, char *argv[]) {
                     unusedDouble, unusedInt, unusedInt,
                     unusedDouble, &M, autovalores, autovetor, LDZ, ISUPPZ);
 
-
-
     if (info) { // info is zero if operation was successfully
         // Free pointers before abort program
         free(diagonal);
@@ -82,20 +80,8 @@ int main(int argc, char *argv[]) {
         return info; // abort program and return info
     }
 
-    printf("autovalores = \n\n");
-    for (int i = 0; i < n; i++) {
-        printf (" %6.2f\n", autovalores[i]);
-    }
-    printf("\n");
-
-    printf("autovetor = \n\n");
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
-            printf (" %6.2f", autovetor[i * n + j]);
-        }
-        printf("\n");
-    }
-    printf("\n");
+    displayVector(autovetor, n, "autovalores");
+    displayMatrix(autovetor, n, n, "autovetor");
 
     // Free pointers before end program
     free(diagonal);
@@ -106,8 +92,8 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-void displayMatrix(double *matrix, int numberOfLines, int numberOfColumns) {
-    printf("matriz = \n\n");
+void displayMatrix(double *matrix, int numberOfLines, int numberOfColumns, char label[]) {
+    printf("%s = \n\n", label);
     for (int i = 0; i < numberOfLines; i++) {
         for (int j = 0; j < numberOfColumns; j++) {
             printf("%7.2f ", matrix[i * numberOfColumns + j]);
@@ -117,8 +103,8 @@ void displayMatrix(double *matrix, int numberOfLines, int numberOfColumns) {
     printf("\n");
 }
 
-void displayVector(double *matrix, int numberOfColumns) {
-    printf("vector = \n\n");
+void displayVector(double *matrix, int numberOfColumns, char label[]) {
+    printf("%s = \n\n", label);
     for (int i = 0; i < numberOfColumns; i++) {
         printf("%5.2f\n", matrix[i]);
     }
