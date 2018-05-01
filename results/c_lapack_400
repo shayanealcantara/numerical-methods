@@ -1,0 +1,18 @@
+# started on Mon Apr 30 23:02:29 2018
+
+
+ Performance counter stats for './t2_lapack.o 400' (10 runs):
+
+         72,568570      task-clock:u (msec)       #    0,996 CPUs utilized            ( +-  1,29% )
+                 0      context-switches:u        #    0,000 K/sec                  
+                 0      cpu-migrations:u          #    0,000 K/sec                  
+               781      page-faults:u             #    0,011 M/sec                    ( +-  0,07% )
+       180.757.004      cycles:u                  #    2,491 GHz                      ( +-  0,32% )
+        56.308.108      stalled-cycles-frontend:u #   31,15% frontend cycles idle     ( +-  1,00% )
+       348.934.436      instructions:u            #    1,93  insn per cycle         
+                                                  #    0,16  stalled cycles per insn  ( +-  0,00% )
+        69.381.690      branches:u                #  956,085 M/sec                    ( +-  0,00% )
+           271.389      branch-misses:u           #    0,39% of all branches          ( +-  0,22% )
+
+       0,072843596 seconds time elapsed                                          ( +-  1,29% )
+
