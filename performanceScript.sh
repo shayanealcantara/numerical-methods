@@ -5,13 +5,11 @@ perf stat -r 2 -B -o results/octave_1000 octave t2_octave.m 1000 > /dev/null
 perf stat -r 1 -B -o results/octave_5000 octave t2_octave.m 5000 > /dev/null
 
 # Performance of GSL C
-ulimit -s 100000000 # Increase Stack
 gcc t2_gsl.c -o t2_gsl.o -lgsl -lgslcblas
 perf stat -r 10 -B -o results/c_gsl_50 ./t2_gsl.o 50 > /dev/null
 perf stat -r 10 -B -o results/c_gsl_400 ./t2_gsl.o 400 > /dev/null
 perf stat -r 2 -B -o results/c_gsl_1000 ./t2_gsl.o 1000 > /dev/null
 perf stat -r 1 -B -o results/c_gsl_5000 ./t2_gsl.o 5000 > /dev/null
-ulimit -s 8192 # Set default Stack of my computer
 
 # Performance of LAPACK C
 gcc t2_lapack.c -o t2_lapack.o -llapacke

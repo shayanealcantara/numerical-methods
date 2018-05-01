@@ -6,7 +6,7 @@
 #define A 1
 #define B 0.5
 
-void displayMatrix(double *, int, int);
+void displayMatrix(double *, int, int, char[]);
 
 int main(int argc, char *argv[]) {
     int n = 10;
@@ -16,10 +16,14 @@ int main(int argc, char *argv[]) {
     } else {
         printf("Using default value of n: %d\n", n);
     }
-    double matrix[n * n];
+
+    // Create matrix
+    double *matrix;
+    unsigned long sizeOfMatrix= n * n * sizeof(double);
+    matrix = malloc(sizeOfMatrix);
 
     // Initialize matrix with 0
-    memset(matrix, 0, sizeof(matrix));
+    memset(matrix, 0, sizeOfMatrix);
 
     // Set a and b in matrix
     matrix[0] = A; // Set [0,0] = 1
@@ -35,46 +39,52 @@ int main(int argc, char *argv[]) {
         matrix[coluna * n + (coluna + 1)] = B;
     }
 
-    displayMatrix(&matrix[0], n, n);
+    displayMatrix(matrix, n, n, "matrix");
 
+    // Reference: https://www.gnu.org/software/gsl/doc/html/eigen.html
+    // Set parameters used in GSL function
     gsl_matrix_view m = gsl_matrix_view_array(matrix, n, n);
-    gsl_vector *eval = gsl_vector_alloc(n);
-    gsl_matrix *evec = gsl_matrix_alloc(n, n);
+    gsl_vector *autovalores = gsl_vector_alloc(n);
+    gsl_matrix *autovetor = gsl_matrix_alloc(n, n);
 
-    gsl_eigen_symmv_workspace * w = gsl_eigen_symmv_alloc(n);
-    gsl_eigen_symmv(&m.matrix, eval, evec, w);
-    gsl_eigen_symmv_free(w);
-    gsl_eigen_symmv_sort(eval, evec, GSL_EIGEN_SORT_ABS_ASC);
+    // If you want autovalores and autovetores
+    gsl_eigen_symmv_workspace * w = gsl_eigen_symmv_alloc(n); // create workspace
+    gsl_eigen_symmv(&m.matrix, autovalores, autovetor, w); // calculate
+    gsl_eigen_symmv_free(w); // free workspace pointer
+    gsl_eigen_symmv_sort(autovalores, autovetor, GSL_EIGEN_SORT_ABS_ASC); // sort autovalores and autovetor
 
-    // gsl_eigen_symm_workspace * w = gsl_eigen_symm_alloc(n);
-    // gsl_eigen_symm(&m.matrix, eval, w);
-    // gsl_eigen_symm_free(w);
-    // gsl_eigen_symm_sort(eval, GSL_EIGEN_SORT_ABS_ASC);
+    // If you only want autovalores
+    // gsl_eigen_symm_workspace * w = gsl_eigen_symm_alloc(n); // create workspace
+    // gsl_eigen_symm(&m.matrix, autovalores, w); // calculate
+    // gsl_eigen_symm_free(w); // free workspace pointer
+    // gsl_eigen_symm_sort(autovalores, GSL_EIGEN_SORT_ABS_ASC); // sort autovalores and autovetor
 
-    printf("autovalor = \n\n");
+    printf("autovalores = \n\n");
     for (int i = 0; i < n; i++) {
-        double eval_i = gsl_vector_get (eval, i);
-        printf (" %6.2f\n", eval_i);
+        double autovalores_i = gsl_vector_get (autovalores, i);
+        printf (" %6.2f\n", autovalores_i);
     }
     printf("\n");
 
     printf("autovetor = \n\n");
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < n; j++) {
-            printf (" %6.2f", gsl_matrix_get (evec, i, j));
+            printf (" %6.2f", gsl_matrix_get (autovetor, i, j));
         }
         printf("\n");
     }
     printf("\n");
 
-    gsl_vector_free (eval);
-    gsl_matrix_free (evec);
+    // free pointers
+    gsl_vector_free (autovalores);
+    gsl_matrix_free (autovetor);
+    free(matrix);
 
     return 0;
 }
 
-void displayMatrix(double *matrix, int numberOfLines, int numberOfColumns) {
-    printf("matriz = \n\n");
+void displayMatrix(double *matrix, int numberOfLines, int numberOfColumns, char label[]) {
+    printf("%s = \n\n", label);
     for (int i = 0; i < numberOfLines; i++) {
         for (int j = 0; j < numberOfColumns; j++) {
             printf("%7.2f ", matrix[i * numberOfColumns + j]);
