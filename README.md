@@ -15,6 +15,30 @@ Results are locate on results/
 - Octave (probably works with Matlab but there is no guarantee)
 - perf utility (just if you want execute the performanceScript)
 
+## Installing dependencies
+### Debian Based
+
+To install LAPACK with blas:
+
+```bash
+sudo apt-get install liblapack3 libblas-dev liblapack-dev liblapacke-dev
+sudo apt-get install libblas-doc liblapack-doc # documentation
+```
+
+To install GSL:
+
+```bash
+sudo apt-get install gsl-bin # maybe this is enough
+sudo apt-get install libgsl23 libgslcblas0 # if it is not enough
+sudo apt-get install libgsl-dev # if you lose your hope
+```
+
+To install perf:
+
+```bash
+sudo apt-get install linux-tools-common linux-tools-`uname -r`
+```
+
 # Compilation and Execution
 ## C using GSL library
 
@@ -77,3 +101,17 @@ Examples of use of command line arguments:
 ./t2_lapack.o 100
 octave t2_octave.m 20
 ```
+
+# References
+
+## GSL:
+
+- [GSL Documentation](https://www.gnu.org/software/gsl/doc/html/index.html)
+    - [https://www.gnu.org/software/gsl/doc/html/eigen.html](Eigensystems)
+
+## Lapack:
+
+- [LAPACK Users' Guide](http://www.netlib.org/lapack/lug/)
+    - [Symmetric Eigenproblems](http://www.netlib.org/lapack/lug/node48.html)
+- [LAPACK Documentation](http://www.netlib.org/lapack/explore-html/)
+    - [lapacke_dstegr documentation](http://www.netlib.org/lapack/explore-html/d3/dfe/lapacke__dstegr_8c_a0a9c0545e1c6533ac382d48482cce94b.html)
